@@ -15,6 +15,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
     public void afterJob(JobExecution jobExecution) {
         if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
             log.info("!!! JOB FINISHED");
+            log.info("Executed in : " + (jobExecution.getEndTime().getTime() - jobExecution.getStartTime().getTime()) + "ms");
         }
     }
 }
