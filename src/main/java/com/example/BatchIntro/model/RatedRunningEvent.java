@@ -1,18 +1,21 @@
 package com.example.BatchIntro.model;
 
-public class InputRunningEvent {
+public class RatedRunningEvent {
     private String name;
     private int distance;
     private double prize;
+    private double prizePerKm;
+    private double rate;
 
-    public InputRunningEvent() {
-
+    public RatedRunningEvent() {
     }
 
-    public InputRunningEvent(String name, int distance, double prize) {
+    public RatedRunningEvent(String name, int distance, double prize, double prizePerKm, double rate) {
         this.name = name;
         this.distance = distance;
         this.prize = prize;
+        this.prizePerKm = prizePerKm;
+        this.rate = rate;
     }
 
     public String getName() {
@@ -39,12 +42,30 @@ public class InputRunningEvent {
         this.prize = prize;
     }
 
+    public double getPrizePerKm() {
+        return prizePerKm;
+    }
+
+    public void setPrizePerKm(double prizePerKm) {
+        this.prizePerKm = prizePerKm;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
     @Override
     public String toString() {
-        return "InputRunningEvent{" +
+        return "RatedRunningEvent{" +
                 "name='" + name + '\'' +
                 ", distance=" + distance +
                 ", prize=" + prize +
+                ", prizePerKm=" + prizePerKm +
+                ", rate=" + rate +
                 '}';
     }
 }

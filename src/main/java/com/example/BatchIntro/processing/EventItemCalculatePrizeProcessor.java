@@ -1,31 +1,27 @@
 package com.example.BatchIntro.processing;
 
-import com.example.BatchIntro.model.InputRunningEvent;
-import com.example.BatchIntro.model.OutputRatedRunningEvent;
+import com.example.BatchIntro.model.BaseRunningEvent;
+import com.example.BatchIntro.model.PrizedRunningEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 
 
-public class EventItemCalculatePrizeProcessor implements ItemProcessor<InputRunningEvent, OutputRatedRunningEvent> {
+public class EventItemCalculatePrizeProcessor implements ItemProcessor<BaseRunningEvent, PrizedRunningEvent> {
 
     private static final Logger logger = LoggerFactory.getLogger(EventItemCalculatePrizeProcessor.class);
 
     @Override
-    public OutputRatedRunningEvent process(InputRunningEvent inputRunningEvent) throws Exception {
-        double prizePerKilometer = getPrizePerKilometer(inputRunningEvent);
-//        double eventRate = getEventRate(inputRunningEvent);
-        OutputRatedRunningEvent outputRatedRunningEvent = new OutputRatedRunningEvent(inputRunningEvent, prizePerKilometer, 0.0d);
-        logger.info("Converted: " + inputRunningEvent + " into: " + outputRatedRunningEvent);
-        return outputRatedRunningEvent;
-    }
-
-    public double getEventRate(InputRunningEvent runningEvent) {
-        return 100.0d - runningEvent.getPrize()/runningEvent.getDistance();
+    public PrizedRunningEvent process(BaseRunningEvent baseRunningEvent) throws Exception {
+        double prizePerKilometer = getPrizePerKilometer(baseRunningEvent);
+//        double eventRate = getEventRate(baseRunningEvent);
+        PrizedRunningEvent prizedRunningEvent = new PrizedRunningEvent(baseRunningEvent, prizePerKilometer);
+        logger.info("Converted: " + baseRunningEvent + " into: " + prizedRunningEvent);
+        return prizedRunningEvent;
     }
 
 
-    public double getPrizePerKilometer(InputRunningEvent runningEvent) {
+    public double getPrizePerKilometer(BaseRunningEvent runningEvent) {
         return runningEvent.getPrize()/runningEvent.getDistance();
     }
 }
